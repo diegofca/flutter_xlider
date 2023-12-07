@@ -178,7 +178,7 @@ class _FlutterSliderState extends State<FlutterSlider>
   double? _containerHeight;
   double? _containerWidth;
 
-  int _decimalScale = 0;
+  int _decimalScale = 2;
 
   double xDragTmp = 0;
   double yDragTmp = 0;
@@ -892,8 +892,6 @@ class _FlutterSliderState extends State<FlutterSlider>
   double getValueByPosition(double position) {
     double value = ((position / (__containerSizeWithoutPadding! / _divisions)) *
         _widgetStep!);
-    value = (double.parse(value.toStringAsFixed(_decimalScale)) -
-        double.parse((value % _widgetStep!).toStringAsFixed(_decimalScale)));
     return value;
   }
 
