@@ -132,7 +132,7 @@ class _FlutterSliderState extends State<FlutterSlider>
   double? _lowerValue = 0;
   double? _upperValue = 0;
   dynamic _outputLowerValue = 0;
-  dynamic _outputUpperValue = 0;
+  double _outputUpperValue = 0.0;
 
   double? _realMin;
   double? _realMax;
@@ -1974,7 +1974,7 @@ class _FlutterSliderState extends State<FlutterSlider>
 
     List<Widget> children = [
       prefix,
-      Text(numberFormat, style: _tooltipData.textStyle),
+      Text(double.parse(numberFormat).toStringAsFixed(_decimalScale), style: _tooltipData.textStyle),
       suffix,
     ];
 
@@ -1993,19 +1993,17 @@ class _FlutterSliderState extends State<FlutterSlider>
         child: Center(
       child: FittedBox(
         child: Container(
-//            height: ,
-//          height: __tooltipKEY.currentContext.size.height,
           key: (side == 'left') ? leftTooltipKey : rightTooltipKey,
-//            alignment: Alignment.center,
           child: (widget.tooltip != null && widget.tooltip!.custom != null)
-              ? widget.tooltip!.custom!(value)
-              : Container(
-                  padding: EdgeInsets.all(8),
+              ? widget.tooltip!.custom!(value.toStringAsFixed(_decimalScale))
+              :Container(
+                  padding: const EdgeInsets.all(8),
                   decoration: _tooltipData.boxStyle!.decoration,
                   foregroundDecoration:
                       _tooltipData.boxStyle!.foregroundDecoration,
                   transform: _tooltipData.boxStyle!.transform,
-                  child: _tooltipHolderWidget),
+                  child: _tooltipHolderWidget
+                  ),
         ),
       ),
     ));
